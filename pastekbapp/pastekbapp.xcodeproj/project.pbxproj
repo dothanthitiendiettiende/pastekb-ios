@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF013C667B176054DBAD86D2 /* libPods-pastekb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D855ABD5338B6F9898061AC /* libPods-pastekb.a */; };
 		D1D5B68A228B0FD0006AA9DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B689228B0FD0006AA9DD /* AppDelegate.m */; };
 		D1D5B68D228B0FD0006AA9DD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B68C228B0FD0006AA9DD /* ViewController.m */; };
 		D1D5B690228B0FD0006AA9DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D5B68E228B0FD0006AA9DD /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 		D1D5B698228B0FD0006AA9DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B697228B0FD0006AA9DD /* main.m */; };
 		D1D5B6A6228B100B006AA9DD /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B6A5228B100B006AA9DD /* KeyboardViewController.m */; };
 		D1D5B6AA228B100C006AA9DD /* pastekb.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D1D5B6A2228B100B006AA9DD /* pastekb.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E3C95235E4D70B3F74834A16 /* libPods-pastekbapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD2910153E3F257B8C2D28 /* libPods-pastekbapp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		084AB8669068B318300EEA18 /* Pods-pastekb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pastekb.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pastekb/Pods-pastekb.debug.xcconfig"; sourceTree = "<group>"; };
+		2ABD2910153E3F257B8C2D28 /* libPods-pastekbapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pastekbapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D855ABD5338B6F9898061AC /* libPods-pastekb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pastekb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B65E6564BF2574ACCE87842F /* Pods-pastekbapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pastekbapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-pastekbapp/Pods-pastekbapp.release.xcconfig"; sourceTree = "<group>"; };
 		D1D5B685228B0FD0006AA9DD /* pastekbapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pastekbapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D5B688228B0FD0006AA9DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1D5B689228B0FD0006AA9DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +62,8 @@
 		D1D5B6A4228B100B006AA9DD /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
 		D1D5B6A5228B100B006AA9DD /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
 		D1D5B6A7228B100C006AA9DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F64427BB345D4BA6BD11EAFB /* Pods-pastekb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pastekb.release.xcconfig"; path = "Pods/Target Support Files/Pods-pastekb/Pods-pastekb.release.xcconfig"; sourceTree = "<group>"; };
+		F8E78A48521563E20BB38241 /* Pods-pastekbapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pastekbapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pastekbapp/Pods-pastekbapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3C95235E4D70B3F74834A16 /* libPods-pastekbapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,18 +79,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF013C667B176054DBAD86D2 /* libPods-pastekb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97D00E75252602BD5A31D1E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D855ABD5338B6F9898061AC /* libPods-pastekb.a */,
+				2ABD2910153E3F257B8C2D28 /* libPods-pastekbapp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C452A562B14F4C9CD3AB71F9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				084AB8669068B318300EEA18 /* Pods-pastekb.debug.xcconfig */,
+				F64427BB345D4BA6BD11EAFB /* Pods-pastekb.release.xcconfig */,
+				F8E78A48521563E20BB38241 /* Pods-pastekbapp.debug.xcconfig */,
+				B65E6564BF2574ACCE87842F /* Pods-pastekbapp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D1D5B67C228B0FD0006AA9DD = {
 			isa = PBXGroup;
 			children = (
 				D1D5B687228B0FD0006AA9DD /* pastekbapp */,
 				D1D5B6A3228B100B006AA9DD /* pastekb */,
 				D1D5B686228B0FD0006AA9DD /* Products */,
+				C452A562B14F4C9CD3AB71F9 /* Pods */,
+				97D00E75252602BD5A31D1E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +159,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1D5B69B228B0FD0006AA9DD /* Build configuration list for PBXNativeTarget "pastekbapp" */;
 			buildPhases = (
+				33FB322B0F9B0AC6B75A0F6A /* [CP] Check Pods Manifest.lock */,
 				D1D5B681228B0FD0006AA9DD /* Sources */,
 				D1D5B682228B0FD0006AA9DD /* Frameworks */,
 				D1D5B683228B0FD0006AA9DD /* Resources */,
@@ -146,6 +179,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1D5B6AB228B100C006AA9DD /* Build configuration list for PBXNativeTarget "pastekb" */;
 			buildPhases = (
+				D35823AA7AB64AAA024C867B /* [CP] Check Pods Manifest.lock */,
 				D1D5B69E228B100B006AA9DD /* Sources */,
 				D1D5B69F228B100B006AA9DD /* Frameworks */,
 				D1D5B6A0228B100B006AA9DD /* Resources */,
@@ -214,6 +248,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33FB322B0F9B0AC6B75A0F6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pastekbapp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D35823AA7AB64AAA024C867B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pastekb-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D1D5B681228B0FD0006AA9DD /* Sources */ = {
@@ -378,6 +451,7 @@
 		};
 		D1D5B69C228B0FD0006AA9DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8E78A48521563E20BB38241 /* Pods-pastekbapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -396,6 +470,7 @@
 		};
 		D1D5B69D228B0FD0006AA9DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B65E6564BF2574ACCE87842F /* Pods-pastekbapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -414,6 +489,7 @@
 		};
 		D1D5B6AC228B100C006AA9DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 084AB8669068B318300EEA18 /* Pods-pastekb.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YPV49M8592;
@@ -433,6 +509,7 @@
 		};
 		D1D5B6AD228B100C006AA9DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F64427BB345D4BA6BD11EAFB /* Pods-pastekb.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YPV49M8592;

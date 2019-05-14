@@ -29,6 +29,9 @@
 @property (nonatomic, strong) NSString *pasteboardString;
 @property (nonatomic, strong) ForEachWithRandomDelay *delayAction;
 
+@property (strong, nonatomic) NSTimer *pasteboardCheckTimer;
+@property (assign, nonatomic) NSInteger pasteboardChangeCount;
+
 @end
 
 @implementation KeyboardViewController
@@ -109,8 +112,15 @@
     
     [self refreshDataFromPasteboard];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIPasteboardChangedNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        [self refreshDataFromPasteboard];
+    __weak typeof(self) wself = self;
+    self.pasteboardCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        NSInteger current = [[UIPasteboard generalPasteboard] changeCount];
+        if(current != wself.pasteboardChangeCount) {
+            wself.pasteboardChangeCount = current;
+            
+            // pasteboard changed
+            [self refreshDataFromPasteboard];
+        }
     }];
 }
 

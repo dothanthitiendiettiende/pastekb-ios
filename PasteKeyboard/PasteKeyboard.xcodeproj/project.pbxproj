@@ -28,6 +28,7 @@
 		D1D5B736228B1A4D006AA9DD /* TKKLog.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B722228B1A4C006AA9DD /* TKKLog.mm */; };
 		D1D5B737228B1A4D006AA9DD /* PAAListViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B72B228B1A4C006AA9DD /* PAAListViewController.mm */; };
 		D1D5B73A228B1A9D006AA9DD /* TinyKeyboardView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B738228B1A9D006AA9DD /* TinyKeyboardView.mm */; };
+		D1D5B744228B2D53006AA9DD /* ForEachWithRandomDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B743228B2D53006AA9DD /* ForEachWithRandomDelay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		D1D5B72D228B1A4C006AA9DD /* Plasma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plasma.h; sourceTree = "<group>"; };
 		D1D5B738228B1A9D006AA9DD /* TinyKeyboardView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TinyKeyboardView.mm; sourceTree = "<group>"; };
 		D1D5B739228B1A9D006AA9DD /* TinyKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinyKeyboardView.h; sourceTree = "<group>"; };
+		D1D5B742228B2D53006AA9DD /* ForEachWithRandomDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForEachWithRandomDelay.h; sourceTree = "<group>"; };
+		D1D5B743228B2D53006AA9DD /* ForEachWithRandomDelay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForEachWithRandomDelay.m; sourceTree = "<group>"; };
 		F244D2009D6D0007A10896CF /* libPods-Keyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Keyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -177,6 +180,8 @@
 				D1D5B707228B18D6006AA9DD /* KeyboardViewController.h */,
 				D1D5B708228B18D6006AA9DD /* KeyboardViewController.m */,
 				D1D5B70A228B18D6006AA9DD /* Info.plist */,
+				D1D5B742228B2D53006AA9DD /* ForEachWithRandomDelay.h */,
+				D1D5B743228B2D53006AA9DD /* ForEachWithRandomDelay.m */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D5B709228B18D6006AA9DD /* KeyboardViewController.m in Sources */,
+				D1D5B744228B2D53006AA9DD /* ForEachWithRandomDelay.m in Sources */,
 				D1D5B73A228B1A9D006AA9DD /* TinyKeyboardView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

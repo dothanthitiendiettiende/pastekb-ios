@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "TinyKeyboardView.h"
 #include <pthread.h>
+#import "ForEachWithRandomDelay.h"
 
 @interface KeyboardViewController () <TinyKeyboardViewDelegate>
 @property (nonatomic, strong) UIView *contentView;
@@ -23,6 +24,10 @@
 @property (nonatomic, strong) UIButton *returnButton;
 
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIButton *inputButton;
+
+@property (nonatomic, strong) NSString *pasteboardString;
+@property (nonatomic, strong) ForEachWithRandomDelay *delayAction;
 
 @end
 
@@ -56,37 +61,64 @@
     
     [self setupUI];
     
-    if(! [self fullAccessAvailable]){
-        for(UIView * view in self.contentView.subviews){
-            view.hidden = YES;
-        }
-        UITextView *textView = [[UITextView alloc] init];
-        textView.backgroundColor = [UIColor clearColor];
-        textView.editable = NO;
-        textView.selectable = NO;
-        textView.font = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:textView];
-        [textView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self.contentView);
-        }];
-        textView.text = @"Please go to Settings > General > Keyboard > Keyboards > Paste Keyboard, and make sure Allow Full Access is turned on.";
+    if ([self fullAccessAvailable]) {
         
-        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_greaterThanOrEqualTo(120);
-        }];
+        [self showStatusText:@"..."];
+    } else {
+        [self showFullAccessGuide];
+    }
+}
+
+- (void)showFullAccessGuide{
+    for(UIView * view in self.contentView.subviews){
+        view.hidden = YES;
+    }
+    UITextView *textView = [[UITextView alloc] init];
+    textView.backgroundColor = [UIColor clearColor];
+    textView.editable = NO;
+    textView.selectable = NO;
+    textView.font = [UIFont systemFontOfSize:16];
+    [self.contentView addSubview:textView];
+    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentView);
+    }];
+    textView.text = @"Please go to Settings > General > Keyboard > Keyboards > Paste Keyboard, and make sure Allow Full Access is turned on.";
+    
+    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_greaterThanOrEqualTo(120);
+    }];
+}
+
+- (void)refreshDataFromPasteboard{
+    
+    self.pasteboardString = [UIPasteboard generalPasteboard].string;
+    NSLog(@"text in pasteboard = %@",self.pasteboardString);
+    
+    NSString *text = [self.pasteboardString copy];
+    if(text.length > 30){
+        text = [text substringToIndex:30];
+        text = [text stringByAppendingString:@" ..."];
+    }
+    [self showStatusText:text];
+}
+
+- (void)initPasteboardData {
+    if(![self fullAccessAvailable]){
+        return;
     }
     
-    [self showStatusText:@"..."];
+    [self refreshDataFromPasteboard];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIPasteboardChangedNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [self refreshDataFromPasteboard];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     NSLog(@"appear");
     
-    if([self fullAccessAvailable]){
-        NSString *text = [UIPasteboard generalPasteboard].string;
-        NSLog(@"text in pasteboard = %@",text);
-    }
+    [self initPasteboardData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -204,12 +236,26 @@
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.font = [UIFont systemFontOfSize:10];
         [self.contentView addSubview:self.textLabel];
         [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left);
             make.top.equalTo(self.contentView.mas_top).offset(20);
             make.bottom.equalTo(self.contentView.mas_bottom).offset(-20);
+        }];
+        
+        self.inputButton = [[UIButton alloc]init];
+        [self.inputButton setTitle:NSLocalizedString(@"Input", @"Title for 'Input' button") forState:UIControlStateNormal];
+        [self.inputButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.inputButton addTarget:self action:@selector(buttonInputTapped:) forControlEvents:UIControlEventTouchUpInside];
+        self.inputButton.backgroundColor = TinyKeyboardViewColor1;
+        [self.contentView addSubview:self.inputButton];
+        [self.inputButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top);
+            make.bottom.equalTo(self.contentView.mas_bottom);
             make.right.equalTo(self.contentView.mas_right);
+            make.width.mas_equalTo(120);
+            make.left.equalTo(self.textLabel.mas_right).offset(20);
         }];
     }
     
@@ -267,5 +313,40 @@
 - (void)TinyKeyboardView:(TinyKeyboardView *)keyboardView characterTapped:(NSString *)character{
     [self.textDocumentProxy insertText:character];
 }
+
+- (NSArray<NSString*>*)splitIntoChars:(NSString*)str {
+    NSMutableArray<NSString*> *chars = [[NSMutableArray alloc]initWithCapacity:10];
+    
+    for (NSUInteger idx = 0; idx < str.length; ++idx) {
+        NSString *cur = [str substringWithRange:NSMakeRange(idx, 1)];
+        [chars addObject:cur];
+    }
+    
+    return chars;
+}
+
+- (void)buttonInputTapped:(id)sender{
+    if(self.pasteboardString.length == 0){
+        return;
+    }
+    
+    NSArray<NSString*> *chars = [self splitIntoChars:self.pasteboardString];
+    
+    if(self.delayAction){
+        self.delayAction.stopped = YES;
+        self.delayAction = nil;
+    }
+    
+    self.delayAction = [[ForEachWithRandomDelay alloc]init];
+    self.delayAction.items = chars;
+    
+    __weak typeof(self) wself = self;
+    self.delayAction.action = ^(NSString* str) {
+        [wself.textDocumentProxy insertText:str];
+    };
+    
+    [self.delayAction forEach];
+}
+
 
 @end

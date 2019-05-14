@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PAAListViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : PAAListViewController
 
 
 @end

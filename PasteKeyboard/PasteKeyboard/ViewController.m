@@ -37,7 +37,13 @@
                                 @{
                                     @"title":NSLocalizedString(@"User Guide (How To Use)", nil),
                                     @"action":^(){
-                                        [wself openInBrowser:@"https://pastekeyboard.github.io"];
+                                        NSArray *languages = [NSLocale preferredLanguages];
+                                        NSString *language = [languages objectAtIndex:0];
+                                        if ([language hasPrefix:@"zh"]) {
+                                            [wself openInBrowser:@"https://pastekeyboard.github.io/zhcn"];
+                                        } else {
+                                            [wself openInBrowser:@"https://pastekeyboard.github.io"];
+                                        }
                                     },
                                     },
                                 @{

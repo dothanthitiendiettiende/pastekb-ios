@@ -36,6 +36,8 @@
 @property (strong, nonatomic) UIProgressView *progressView;
 @property (strong, nonatomic) UISlider *speedSlider;
 
+@property (strong, nonatomic) UITextView *guideFullAccessTextView;
+
 @end
 
 @implementation KeyboardViewController
@@ -62,17 +64,16 @@
         view.hidden = YES;
     }
     
-    UITextView *textView = [[UITextView alloc] init];
-    textView.backgroundColor = [UIColor clearColor];
-    textView.editable = NO;
-    textView.selectable = NO;
-    textView.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:textView];
-    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.guideFullAccessTextView = [[UITextView alloc] init];
+    self.guideFullAccessTextView.backgroundColor = [UIColor clearColor];
+    self.guideFullAccessTextView.editable = NO;
+    self.guideFullAccessTextView.selectable = NO;
+    self.guideFullAccessTextView.font = [UIFont systemFontOfSize:18];
+    [self.contentView addSubview:self.guideFullAccessTextView];
+    [self.guideFullAccessTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
-    textView.text = NSLocalizedString(@"GuideAllowFullAccess", nil);
-    
+    self.guideFullAccessTextView.text = NSLocalizedString(@"GuideAllowFullAccess", nil);
 }
 
 - (void)refreshDataFromPasteboard{
@@ -288,6 +289,9 @@
             [button setBackgroundColor:[UIColor colorWithWhite:138/255.0 alpha:1.0]];
         }
         self.textLabel.textColor = [UIColor whiteColor];
+        if (self.guideFullAccessTextView) {
+            self.guideFullAccessTextView.textColor = [UIColor whiteColor];
+        }
     } else {
         // light
         for(UIButton *button in buttons){
@@ -296,6 +300,9 @@
             [button setBackgroundColor:[UIColor whiteColor]];
         }
         self.textLabel.textColor = [UIColor blackColor];
+        if (self.guideFullAccessTextView) {
+            self.guideFullAccessTextView.textColor = [UIColor blackColor];
+        }
     }
 }
 

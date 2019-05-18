@@ -71,7 +71,7 @@
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
-    textView.text = @"Please go to Settings > General > Keyboard > Keyboards > Paste Keyboard, and make sure Allow Full Access is turned on.";
+    textView.text = NSLocalizedString(@"GuideAllowFullAccess", nil);
     
 }
 
@@ -79,7 +79,7 @@
     self.pasteboardString = [UIPasteboard generalPasteboard].string;
     NSLog(@"text in pasteboard = %@",self.pasteboardString);
     if([self.pasteboardString length] == 0){
-        [self showStatusText:@"No data found in pasteboard"];
+        [self showStatusText:NSLocalizedString(@"No data found in pasteboard",nil)];
         return;
     }
     
@@ -149,25 +149,25 @@
     // button view
     {
         self.nextKeyboardButton = [[UIButton alloc]init];
-        [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", @"Title for 'Next' button") forState:UIControlStateNormal];
+        [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
         [self.nextKeyboardButton addTarget:self action:@selector(handleInputModeListFromView:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
         [self configButtonStyle:self.nextKeyboardButton];
         [self.buttonView addSubview:self.nextKeyboardButton];
         
         self.tinyKeyboardButton = [[UIButton alloc]init];
-        [self.tinyKeyboardButton setTitle:NSLocalizedString(@"Keyboard", @"Title for 'Keyboard' button") forState:UIControlStateNormal];
+        [self.tinyKeyboardButton setTitle:NSLocalizedString(@"Keyboard", nil) forState:UIControlStateNormal];
         [self.tinyKeyboardButton addTarget:self action:@selector(buttonTinyKeyboardTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self configButtonStyle:self.tinyKeyboardButton];
         [self.buttonView addSubview:self.tinyKeyboardButton];
         
         self.deleteButton = [[UIButton alloc]init];
-        [self.deleteButton setTitle:NSLocalizedString(@"Delete", @"Title for 'Delete' button") forState:UIControlStateNormal];
+        [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
         [self.deleteButton addTarget:self action:@selector(buttonBackwardTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self configButtonStyle:self.deleteButton];
         [self.buttonView addSubview:self.deleteButton];
         
         self.returnButton = [[UIButton alloc]init];
-        [self.returnButton setTitle:NSLocalizedString(@"Return", @"Title for 'Return' button") forState:UIControlStateNormal];
+        [self.returnButton setTitle:NSLocalizedString(@"Return", nil) forState:UIControlStateNormal];
         [self.returnButton addTarget:self action:@selector(buttonReturnTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self configButtonStyle:self.returnButton];
         [self.buttonView addSubview:self.returnButton];
@@ -225,7 +225,7 @@
         }];
         
         self.inputButton = [[UIButton alloc]init];
-        [self.inputButton setTitle:NSLocalizedString(@"Input", @"Title for 'Input' button") forState:UIControlStateNormal];
+        [self.inputButton setTitle:NSLocalizedString(@"Input", nil) forState:UIControlStateNormal];
         [self.inputButton addTarget:self action:@selector(buttonInputTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self configButtonStyle:self.inputButton];
         [self.contentView addSubview:self.inputButton];
@@ -321,19 +321,19 @@
     }
     switch (self.textDocumentProxy.returnKeyType) {
         case UIReturnKeySend:{
-            [self.returnButton setTitle:NSLocalizedString(@"Send", @"Title for 'Send' button") forState:UIControlStateNormal];
+            [self.returnButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
             break;
         }
         case UIReturnKeyDone:{
-            [self.returnButton setTitle:NSLocalizedString(@"Done", @"Title for 'Return' button") forState:UIControlStateNormal];
+            [self.returnButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
             break;
         }
         case UIReturnKeySearch:{
-            [self.returnButton setTitle:NSLocalizedString(@"Search", @"Title for 'Search' button") forState:UIControlStateNormal];
+            [self.returnButton setTitle:NSLocalizedString(@"Search", nil) forState:UIControlStateNormal];
             break;
         }
         default:{
-            [self.returnButton setTitle:NSLocalizedString(@"Return", @"Title for 'Return' button") forState:UIControlStateNormal];
+            [self.returnButton setTitle:NSLocalizedString(@"Return", nil) forState:UIControlStateNormal];
             break;
         }
     }

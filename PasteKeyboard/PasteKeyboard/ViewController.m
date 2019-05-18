@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.navigationItem.title = @"Paste Keyboard";
+    self.navigationItem.title = NSLocalizedString(@"Paste Keyboard",nil);
     self.view.backgroundColor = [UIColor whiteColor];
     
     
@@ -32,16 +32,16 @@
     __weak typeof(self) wself = self;
     self.groups = @[
                     @{
-                        @"title":@"General",
+                        @"title":NSLocalizedString(@"General", nil),
                         @"rows" : @[
                                 @{
-                                    @"title":@"User Guide (How To Use)",
+                                    @"title":NSLocalizedString(@"User Guide (How To Use)", nil),
                                     @"action":^(){
                                         [wself openInBrowser:@"https://pastekeyboard.github.io"];
                                     },
                                     },
                                 @{
-                                    @"title":@"Enable Allow Full Access",
+                                    @"title":NSLocalizedString(@"Enable Allow Full Access",nil),
                                     @"action":^(){
                                         NSURL *settingUrl = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                         [[UIApplication sharedApplication] openURL:settingUrl options:@{} completionHandler:^(BOOL success) {}];
@@ -50,10 +50,10 @@
                                 ]
                         },
                     @{
-                        @"title":@"Feedback",
+                        @"title":NSLocalizedString(@"Feedback",nil),
                         @"rows" : @[
                                 @{
-                                    @"title":@"Email",
+                                    @"title":NSLocalizedString(@"Email",nil),
                                     @"action":^(){
                                         [wself openURL:@"mailto://everettjf@live.com"];
                                     },
@@ -61,33 +61,33 @@
                                 ]
                         },
                     @{
-                        @"title":@"Author",
+                        @"title":NSLocalizedString(@"Author",nil),
                         @"rows" : @[
                                 @{
-                                    @"title":@"Twitter",
-                                    @"action":^(){
-                                        [wself openInBrowser:@"https://twitter.com/everettjf"];
-                                    },
-                                    },
-                                @{
-                                    @"title":@"Weibo",
+                                    @"title":NSLocalizedString(@"Weibo",nil),
                                     @"action":^(){
                                         [wself openInBrowser:@"https://weibo.com/everettjf"];
                                     },
                                     },
                                 @{
-                                    @"title":@"Follow Wechat",
+                                    @"title":NSLocalizedString(@"Follow Wechat",nil),
                                     @"action":^(){
                                         [wself openInBrowser:@"https://everettjf.github.io/bukuzao/"];
+                                    },
+                                    },
+                                @{
+                                    @"title":NSLocalizedString(@"Twitter",nil),
+                                    @"action":^(){
+                                        [wself openInBrowser:@"https://twitter.com/everettjf"];
                                     },
                                     },
                                 ]
                         },
                     @{
-                        @"title":@"More",
+                        @"title":NSLocalizedString(@"More",nil),
                         @"rows" : @[
                                 @{
-                                    @"title":[NSString stringWithFormat:@"Version : %@",appVersion],
+                                    @"title":[NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"Version",nil),appVersion],
                                     @"action":^(){
                                     },
                                     },

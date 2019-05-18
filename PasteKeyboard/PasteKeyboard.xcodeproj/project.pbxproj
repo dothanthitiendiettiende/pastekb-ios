@@ -10,6 +10,9 @@
 		50FD4847AE3F8AF2360E6E62 /* libPods-Keyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F244D2009D6D0007A10896CF /* libPods-Keyboard.a */; };
 		607DFD6C6B5EB21A6CB63001 /* libPods-PasteKeyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2334EBBE75C5BA30345F1AAB /* libPods-PasteKeyboard.a */; };
 		D15CFDE5228FDA0E00731CBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15CFDE4228FDA0E00731CBB /* GoogleService-Info.plist */; };
+		D189D60922903F6D006394DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D189D60B22903F6D006394DA /* InfoPlist.strings */; };
+		D189D60F22904011006394DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D189D61122904011006394DA /* Localizable.strings */; };
+		D189D61822904499006394DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D189D61A22904499006394DA /* Localizable.strings */; };
 		D1D5B6ED228B18C0006AA9DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B6EC228B18C0006AA9DD /* AppDelegate.m */; };
 		D1D5B6F0228B18C0006AA9DD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B6EF228B18C0006AA9DD /* ViewController.m */; };
 		D1D5B6F3228B18C0006AA9DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D5B6F1228B18C0006AA9DD /* Main.storyboard */; };
@@ -63,6 +66,12 @@
 		53882AF92E3CB5E44E5E22C3 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		B01183636AFD164C58F1C11F /* Pods-PasteKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PasteKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-PasteKeyboard/Pods-PasteKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		D15CFDE4228FDA0E00731CBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D189D60522903F16006394DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		D189D60622903F16006394DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D189D60A22903F6D006394DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D189D61222904015006394DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D189D61922904499006394DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D189D61B229044E1006394DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D1D5B6E8228B18C0006AA9DD /* Paste Keyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paste Keyboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D5B6EB228B18C0006AA9DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1D5B6EC228B18C0006AA9DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -170,6 +179,8 @@
 				D1D5B6F6228B18C1006AA9DD /* LaunchScreen.storyboard */,
 				D1D5B6F9228B18C1006AA9DD /* Info.plist */,
 				D1D5B6FA228B18C1006AA9DD /* main.m */,
+				D189D60B22903F6D006394DA /* InfoPlist.strings */,
+				D189D61122904011006394DA /* Localizable.strings */,
 			);
 			path = PasteKeyboard;
 			sourceTree = "<group>";
@@ -185,6 +196,7 @@
 				D1D5B70A228B18D6006AA9DD /* Info.plist */,
 				D1D5B742228B2D53006AA9DD /* ForEachWithRandomDelay.h */,
 				D1D5B743228B2D53006AA9DD /* ForEachWithRandomDelay.m */,
+				D189D61A22904499006394DA /* Localizable.strings */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -326,6 +338,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D1D5B6DF228B18C0006AA9DD;
 			productRefGroup = D1D5B6E9228B18C0006AA9DD /* Products */;
@@ -343,7 +356,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D189D60F22904011006394DA /* Localizable.strings in Resources */,
 				D1D5B6F8228B18C1006AA9DD /* LaunchScreen.storyboard in Resources */,
+				D189D60922903F6D006394DA /* InfoPlist.strings in Resources */,
 				D1D5B6F5228B18C1006AA9DD /* Assets.xcassets in Resources */,
 				D1D5B6F3228B18C0006AA9DD /* Main.storyboard in Resources */,
 			);
@@ -354,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D15CFDE5228FDA0E00731CBB /* GoogleService-Info.plist in Resources */,
+				D189D61822904499006394DA /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,10 +456,36 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D189D60B22903F6D006394DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D189D60A22903F6D006394DA /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D189D61122904011006394DA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D189D61222904015006394DA /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D189D61A22904499006394DA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D189D61922904499006394DA /* zh-Hans */,
+				D189D61B229044E1006394DA /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D1D5B6F1228B18C0006AA9DD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D1D5B6F2228B18C0006AA9DD /* Base */,
+				D189D60522903F16006394DA /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -452,6 +494,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D1D5B6F7228B18C1006AA9DD /* Base */,
+				D189D60622903F16006394DA /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -463,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -522,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

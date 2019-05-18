@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  PasteKeyboard
+
+  Created by everettjf on 2019/5/18.
+  Copyright © 2019 everettjf. All rights reserved.
+*/
+"GuideAllowFullAccess" = "Please go to Settings > General > Keyboard > Keyboards > Paste Keyboard, and make sure Allow Full Access is turned on.";

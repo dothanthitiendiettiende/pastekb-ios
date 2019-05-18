@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  PasteKeyboard
+
+  Created by everettjf on 2019/5/18.
+  Copyright © 2019 everettjf. All rights reserved.
+*/
+"Paste Keyboard" = "剪贴板输入法";
+"General" = "通用";
+"User Guide (How To Use)" = "使用方法";
+"Enable Allow Full Access" = "允许完全访问";
+"Feedback" = "反馈";
+"Author" = "作者";
+"Weibo" = "微博";
+"Follow Wechat" = "关注微信订阅号";
+"More" = "更多";
+"Version" = "版本";
+"Email" = "邮件";
+"Twitter" = "推特";

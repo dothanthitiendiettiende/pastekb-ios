@@ -85,8 +85,8 @@
     }
     
     NSString *text = [self.pasteboardString copy];
-    if(text.length > 30){
-        text = [text substringToIndex:30];
+    if(text.length > 100){
+        text = [text substringToIndex:100];
         text = [text stringByAppendingString:@" ..."];
     }
     [self showStatusText:text];
@@ -134,15 +134,16 @@
         make.top.mas_equalTo(self.view);
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
+        make.height.mas_greaterThanOrEqualTo(120);
     }];
     
     self.buttonView = [[UIView alloc] init];
     [self.view addSubview:self.buttonView];
     [self.buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_bottom).offset(2);
+        make.top.mas_equalTo(self.contentView.mas_bottom).offset(5);
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).offset(-5);
         make.height.mas_equalTo(40);
     }];
     
@@ -175,13 +176,13 @@
         BOOL needSwitchKey = [self needsInputModeSwitchKey];
         if(needSwitchKey){
             [self.nextKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.buttonView).offset(2);
+                make.left.mas_equalTo(self.buttonView).offset(5);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
             }];
             
             [self.tinyKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.nextKeyboardButton.mas_right).offset(2);
+                make.left.mas_equalTo(self.nextKeyboardButton.mas_right).offset(5);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
                 make.width.mas_equalTo(self.nextKeyboardButton);
@@ -189,23 +190,23 @@
             
         }else{
             [self.tinyKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.buttonView).offset(2);
+                make.left.mas_equalTo(self.buttonView).offset(5);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
             }];
         }
         
         [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.tinyKeyboardButton.mas_right).offset(2);
+            make.left.mas_equalTo(self.tinyKeyboardButton.mas_right).offset(5);
             make.top.mas_equalTo(self.buttonView);
             make.bottom.mas_equalTo(self.buttonView);
             make.width.mas_equalTo(self.tinyKeyboardButton);
         }];
         
         [self.returnButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.deleteButton.mas_right).offset(2);
+            make.left.mas_equalTo(self.deleteButton.mas_right).offset(5);
             make.top.mas_equalTo(self.buttonView);
-            make.right.mas_equalTo(self.buttonView).offset(-2);
+            make.right.mas_equalTo(self.buttonView).offset(-5);
             make.bottom.mas_equalTo(self.buttonView);
             make.width.mas_equalTo(self.deleteButton);
         }];
@@ -215,12 +216,13 @@
     {
         self.progressView = [[UIProgressView alloc] init];
         self.progressView.progress = 0.0;
+        self.progressView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:self.progressView];
         [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView);
             make.right.mas_equalTo(self.contentView);
             make.top.mas_equalTo(self.contentView);
-            make.height.mas_equalTo(3);
+            make.height.mas_equalTo(5);
         }];
         
         self.inputButton = [[UIButton alloc]init];
@@ -229,10 +231,10 @@
         [self configButtonStyle:self.inputButton];
         [self.contentView addSubview:self.inputButton];
         [self.inputButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.progressView.mas_bottom);
+            make.top.equalTo(self.progressView.mas_bottom).offset(5);
             make.bottom.equalTo(self.contentView);
-            make.right.equalTo(self.contentView);
-            make.width.mas_equalTo(120);
+            make.right.equalTo(self.contentView).offset(-5);
+            make.width.mas_equalTo(100);
         }];
         
         self.speedSlider = [[UISlider alloc] init];
@@ -243,26 +245,26 @@
         [self.speedSlider addTarget:self action:@selector(onSpeedSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.speedSlider];
         [self.speedSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.contentView);
+            make.left.mas_equalTo(self.contentView).offset(5);
             make.top.mas_equalTo(self.progressView.mas_bottom);
-            make.right.mas_equalTo(self.inputButton.mas_left).offset(-10);
+            make.right.mas_equalTo(self.inputButton.mas_left).offset(-5);
         }];
         
         self.textLabel = [[UILabel alloc] init];
-        self.textLabel.numberOfLines = 0;
+        self.textLabel.numberOfLines = 5;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.font = [UIFont systemFontOfSize:10];
+        self.textLabel.textAlignment = NSTextAlignmentLeft;
+        self.textLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.textLabel];
         [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView);
-            make.top.equalTo(self.speedSlider.mas_bottom).offset(10);
-            make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
-            make.right.mas_equalTo(self.inputButton.mas_left).offset(-10);
+            make.left.equalTo(self.contentView).offset(5);
+            make.top.equalTo(self.speedSlider.mas_bottom).offset(5);
+            make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
+            make.right.mas_equalTo(self.inputButton.mas_left).offset(-5);
         }];
         
     }
-    [self configColors:[UIColor blackColor]];
+    [self configColors:NO];
 }
 - (void)onSpeedSliderValueChanged:(id)sender{
     if(self.delayAction) {
@@ -270,21 +272,40 @@
     }
 }
 
-- (void)configColors:(UIColor *)textColor{
-    [self.nextKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
-    [self.tinyKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:textColor forState:UIControlStateNormal];
-    [self.returnButton setTitleColor:textColor forState:UIControlStateNormal];
-    [self.inputButton setTitleColor:textColor forState:UIControlStateNormal];
+- (void)configColors:(BOOL)darkMode{
+    NSArray<UIButton*> *buttons = @[
+                                    self.nextKeyboardButton,
+                                    self.tinyKeyboardButton,
+                                    self.deleteButton,
+                                    self.returnButton,
+                                    self.inputButton,
+                                    ];
     
-    self.textLabel.textColor = textColor;
+    if (darkMode) {
+        // dark
+        for(UIButton *button in buttons){
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTintColor:[UIColor whiteColor]];
+            [button setBackgroundColor:[UIColor colorWithWhite:138/255.0 alpha:1.0]];
+        }
+        self.textLabel.textColor = [UIColor whiteColor];
+    } else {
+        // light
+        for(UIButton *button in buttons){
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [button setTintColor:[UIColor blackColor]];
+            [button setBackgroundColor:[UIColor whiteColor]];
+        }
+        self.textLabel.textColor = [UIColor blackColor];
+    }
 }
 
 - (void)configButtonStyle:(UIButton*)button{
     button.layer.masksToBounds = YES;
-    button.layer.cornerRadius = 5;
-    button.layer.borderWidth = 1;
-    button.layer.borderColor = [UIColor grayColor].CGColor;
+    button.layer.cornerRadius = 5.0;
+    button.layer.shadowOffset = CGSizeMake(0, 1);
+    button.layer.shadowRadius = 0.0;
+    button.layer.shadowOpacity = 0.35;
 }
 
 - (void)textWillChange:(id<UITextInput>)textInput {
@@ -295,9 +316,9 @@
     // The app has just changed the document's contents, the document context has been updated.
     
     if (self.textDocumentProxy.keyboardAppearance == UIKeyboardAppearanceDark) {
-        [self configColors:[UIColor whiteColor]];
+        [self configColors:YES];
     } else {
-        [self configColors:[UIColor blackColor]];
+        [self configColors:NO];
     }
 }
 
@@ -365,6 +386,7 @@
     
     self.delayAction = [[ForEachWithRandomDelay alloc]init];
     self.delayAction.items = chars;
+    self.delayAction.speedThreshold = self.speedSlider.value;
     
     __weak typeof(self) wself = self;
     self.delayAction.action = ^(NSString* str) {

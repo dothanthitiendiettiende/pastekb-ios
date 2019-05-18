@@ -38,7 +38,12 @@
         self.speedThreshold = 100;
     }
     
-    double delayMs = (100 - self.speedThreshold) + arc4random() % 100;
+    NSUInteger keyvalue = 100 - self.speedThreshold;
+    if (keyvalue <= 0) {
+        keyvalue = 2;
+    }
+    
+    double delayMs = keyvalue + arc4random() % keyvalue;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayMs/1000 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if(self.stopped){
             return;

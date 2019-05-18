@@ -47,6 +47,12 @@
             || [currentString isEqualToString:@"\n"]
             ){
             self.accumulateString = [self.accumulateString stringByAppendingString:currentString];
+            
+            if (self.currentIndex == self.items.count - 1) {
+                // last
+                self.action(self.accumulateString);
+                self.accumulateString = @"";
+            }
         } else {
             if (self.accumulateString.length > 0) {
                 self.accumulateString = [self.accumulateString stringByAppendingString:currentString];

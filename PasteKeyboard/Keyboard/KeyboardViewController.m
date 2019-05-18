@@ -50,37 +50,31 @@
     
     [self setupUI];
     
-    if ([self hasFullAccess]) {
-        [self showStatusText:@"..."];
-    } else {
-        [self showFullAccessGuide];
-    }
 }
 
 - (void)showFullAccessGuide{
     for(UIView * view in self.contentView.subviews){
         view.hidden = YES;
     }
+    
     UITextView *textView = [[UITextView alloc] init];
     textView.backgroundColor = [UIColor clearColor];
     textView.editable = NO;
     textView.selectable = NO;
-    textView.font = [UIFont systemFontOfSize:16];
+    textView.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
     textView.text = @"Please go to Settings > General > Keyboard > Keyboards > Paste Keyboard, and make sure Allow Full Access is turned on.";
     
-    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_greaterThanOrEqualTo(120);
-    }];
 }
 
 - (void)refreshDataFromPasteboard{
     self.pasteboardString = [UIPasteboard generalPasteboard].string;
     NSLog(@"text in pasteboard = %@",self.pasteboardString);
-    if(!self.pasteboardString){
+    if([self.pasteboardString length] == 0){
+        [self showStatusText:@"No data found in pasteboard"];
         return;
     }
     
@@ -93,10 +87,6 @@
 }
 
 - (void)initPasteboardData {
-    if(![self hasFullAccess]){
-        return;
-    }
-    
     [self refreshDataFromPasteboard];
     
     __weak typeof(self) wself = self;
@@ -115,7 +105,11 @@
     [super viewDidAppear:animated];
     NSLog(@"appear");
     
-    [self initPasteboardData];
+    if ([self hasFullAccess]) {
+        [self initPasteboardData];
+    } else {
+        [self showFullAccessGuide];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -134,7 +128,7 @@
         make.top.mas_equalTo(self.view);
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_greaterThanOrEqualTo(120);
+        make.height.mas_greaterThanOrEqualTo(80);
     }];
     
     self.buttonView = [[UIView alloc] init];
@@ -150,13 +144,13 @@
     // button view
     {
         self.nextKeyboardButton = [[UIButton alloc]init];
-        [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
+        [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", @"Title for 'Next' button") forState:UIControlStateNormal];
         [self.nextKeyboardButton addTarget:self action:@selector(handleInputModeListFromView:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
         [self configButtonStyle:self.nextKeyboardButton];
         [self.buttonView addSubview:self.nextKeyboardButton];
         
         self.tinyKeyboardButton = [[UIButton alloc]init];
-        [self.tinyKeyboardButton setTitle:NSLocalizedString(@"Tiny", @"Title for 'Tiny Keyboard' button") forState:UIControlStateNormal];
+        [self.tinyKeyboardButton setTitle:NSLocalizedString(@"Keyboard", @"Title for 'Keyboard' button") forState:UIControlStateNormal];
         [self.tinyKeyboardButton addTarget:self action:@selector(buttonTinyKeyboardTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self configButtonStyle:self.tinyKeyboardButton];
         [self.buttonView addSubview:self.tinyKeyboardButton];
@@ -243,7 +237,7 @@
         self.speedSlider.value = 50.0;
         self.speedSlider.continuous = YES;
         [self.speedSlider addTarget:self action:@selector(onSpeedSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:self.speedSlider];
+        [self.contentView addSubview:self.speedSlider];
         [self.speedSlider mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView).offset(5);
             make.top.mas_equalTo(self.progressView.mas_bottom);
@@ -319,6 +313,24 @@
         [self configColors:YES];
     } else {
         [self configColors:NO];
+    }
+    switch (self.textDocumentProxy.returnKeyType) {
+        case UIReturnKeySend:{
+            [self.returnButton setTitle:NSLocalizedString(@"Send", @"Title for 'Send' button") forState:UIControlStateNormal];
+            break;
+        }
+        case UIReturnKeyDone:{
+            [self.returnButton setTitle:NSLocalizedString(@"Done", @"Title for 'Return' button") forState:UIControlStateNormal];
+            break;
+        }
+        case UIReturnKeySearch:{
+            [self.returnButton setTitle:NSLocalizedString(@"Search", @"Title for 'Search' button") forState:UIControlStateNormal];
+            break;
+        }
+        default:{
+            [self.returnButton setTitle:NSLocalizedString(@"Return", @"Title for 'Return' button") forState:UIControlStateNormal];
+            break;
+        }
     }
 }
 

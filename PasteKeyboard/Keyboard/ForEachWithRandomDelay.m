@@ -10,9 +10,20 @@
 
 @interface ForEachWithRandomDelay ()
 @property (nonatomic,assign) NSUInteger currentIndex;
+@property (nonatomic,strong) NSString* accumulateString;
 @end
 
 @implementation ForEachWithRandomDelay
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _accumulateString = @"";
+        _currentIndex = 0;
+    }
+    return self;
+}
 
 - (void)forEach{
     self.currentIndex = 0;
@@ -31,7 +42,21 @@
             return;
         }
         
-        self.action(self.items[self.currentIndex]);
+        NSString *currentString = self.items[self.currentIndex];
+        if ([currentString isEqualToString:@"@"]
+            || [currentString isEqualToString:@"\n"]
+            ){
+            self.accumulateString = [self.accumulateString stringByAppendingString:currentString];
+        } else {
+            if (self.accumulateString.length > 0) {
+                self.accumulateString = [self.accumulateString stringByAppendingString:currentString];
+                self.action(self.accumulateString);
+                self.accumulateString = @"";
+            } else {
+                self.action(currentString);
+            }
+        }
+        
         self.currentIndex += 1;
         
         [self next];

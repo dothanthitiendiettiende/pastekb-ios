@@ -11,6 +11,7 @@
 #import "TinyKeyboardView.h"
 #include <pthread.h>
 #import "ForEachWithRandomDelay.h"
+@import Firebase;
 
 @interface KeyboardViewController () <TinyKeyboardViewDelegate>
 @property (nonatomic, strong) UIView *contentView;
@@ -50,6 +51,10 @@
     
     [self setupUI];
     
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [FIRApp configure];
+    });
 }
 
 - (void)showFullAccessGuide{

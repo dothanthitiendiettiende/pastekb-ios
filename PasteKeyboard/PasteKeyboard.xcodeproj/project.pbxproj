@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50FD4847AE3F8AF2360E6E62 /* libPods-Keyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F244D2009D6D0007A10896CF /* libPods-Keyboard.a */; };
 		607DFD6C6B5EB21A6CB63001 /* libPods-PasteKeyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2334EBBE75C5BA30345F1AAB /* libPods-PasteKeyboard.a */; };
+		D15CFDE5228FDA0E00731CBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15CFDE4228FDA0E00731CBB /* GoogleService-Info.plist */; };
 		D1D5B6ED228B18C0006AA9DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B6EC228B18C0006AA9DD /* AppDelegate.m */; };
 		D1D5B6F0228B18C0006AA9DD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D5B6EF228B18C0006AA9DD /* ViewController.m */; };
 		D1D5B6F3228B18C0006AA9DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D5B6F1228B18C0006AA9DD /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		3A25C92C653F4CAB37C5B6E5 /* Pods-Keyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.release.xcconfig"; sourceTree = "<group>"; };
 		53882AF92E3CB5E44E5E22C3 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		B01183636AFD164C58F1C11F /* Pods-PasteKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PasteKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-PasteKeyboard/Pods-PasteKeyboard.release.xcconfig"; sourceTree = "<group>"; };
+		D15CFDE4228FDA0E00731CBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1D5B6E8228B18C0006AA9DD /* Paste Keyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paste Keyboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D5B6EB228B18C0006AA9DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1D5B6EC228B18C0006AA9DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		D1D5B706228B18D6006AA9DD /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				D15CFDE4228FDA0E00731CBB /* GoogleService-Info.plist */,
 				D1D5B739228B1A9D006AA9DD /* TinyKeyboardView.h */,
 				D1D5B738228B1A9D006AA9DD /* TinyKeyboardView.mm */,
 				D1D5B707228B18D6006AA9DD /* KeyboardViewController.h */,
@@ -350,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D15CFDE5228FDA0E00731CBB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

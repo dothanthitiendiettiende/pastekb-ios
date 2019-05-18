@@ -411,9 +411,9 @@
     };
     self.delayAction.onProgress = ^(float progress) {
         if (progress == 1.0) {
-            [wself.progressView setProgress:progress animated:YES];
+            [wself.progressView setProgress:progress animated:NO];
         } else if (progress == 0.0) {
-            [wself.progressView setProgress:progress animated:YES];
+            [wself.progressView setProgress:progress animated:NO];
         } else {
             if (progress - wself.progressView.progress >= 0.01) {
                 [wself.progressView setProgress:progress animated:NO];

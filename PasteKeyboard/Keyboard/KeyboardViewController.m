@@ -223,18 +223,6 @@
             make.height.mas_equalTo(3);
         }];
         
-        self.textLabel = [[UILabel alloc] init];
-        self.textLabel.numberOfLines = 0;
-        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.font = [UIFont systemFontOfSize:10];
-        [self.contentView addSubview:self.textLabel];
-        [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView);
-            make.top.equalTo(self.progressView.mas_bottom).offset(20);
-            make.bottom.equalTo(self.contentView.mas_bottom).offset(-20);
-        }];
-        
         self.inputButton = [[UIButton alloc]init];
         [self.inputButton setTitle:NSLocalizedString(@"Input", @"Title for 'Input' button") forState:UIControlStateNormal];
         [self.inputButton addTarget:self action:@selector(buttonInputTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -245,10 +233,41 @@
             make.bottom.equalTo(self.contentView);
             make.right.equalTo(self.contentView);
             make.width.mas_equalTo(120);
-            make.left.equalTo(self.textLabel.mas_right).offset(20);
         }];
+        
+        self.speedSlider = [[UISlider alloc] init];
+        self.speedSlider.minimumValue = 0.0;
+        self.speedSlider.maximumValue = 100.0;
+        self.speedSlider.value = 50.0;
+        self.speedSlider.continuous = YES;
+        [self.speedSlider addTarget:self action:@selector(onSpeedSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:self.speedSlider];
+        [self.speedSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.contentView);
+            make.top.mas_equalTo(self.progressView.mas_bottom);
+            make.right.mas_equalTo(self.inputButton.mas_left).offset(-10);
+        }];
+        
+        self.textLabel = [[UILabel alloc] init];
+        self.textLabel.numberOfLines = 0;
+        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.font = [UIFont systemFontOfSize:10];
+        [self.contentView addSubview:self.textLabel];
+        [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView);
+            make.top.equalTo(self.speedSlider.mas_bottom).offset(10);
+            make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+            make.right.mas_equalTo(self.inputButton.mas_left).offset(-10);
+        }];
+        
     }
     [self configColors:[UIColor blackColor]];
+}
+- (void)onSpeedSliderValueChanged:(id)sender{
+    if(self.delayAction) {
+        self.delayAction.speedThreshold = self.speedSlider.value;
+    }
 }
 
 - (void)configColors:(UIColor *)textColor{

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ForEachWithRandomDelay : NSObject
 @property (nonatomic,strong) NSArray<NSString*>* items;
 @property (nonatomic,strong) void (^action)(NSString*);
-@property (nonatomic,strong) void (^onProgress)(float progress);
+@property (nonatomic,strong) void (^onProgress)(float progress); // progress 0.0-1.0
 @property (nonatomic,assign) BOOL stopped;
 @property (nonatomic,assign) NSUInteger speedThreshold; // 0(slow)-100(fast), default 50
 

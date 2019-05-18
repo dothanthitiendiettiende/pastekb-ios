@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Paste Keyboard</string>
+	<string>剪贴板输入法</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,8 +28,6 @@
 			<false/>
 			<key>PrefersRightToLeft</key>
 			<false/>
-			<key>PrimaryLanguage</key>
-			<string>en-US</string>
 			<key>RequestsOpenAccess</key>
 			<true/>
 		</dict>

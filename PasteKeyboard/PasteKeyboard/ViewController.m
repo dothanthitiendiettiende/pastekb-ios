@@ -35,9 +35,16 @@
                         @"title":@"General",
                         @"rows" : @[
                                 @{
-                                    @"title":@"User Guide",
+                                    @"title":@"User Guide (How To Use)",
                                     @"action":^(){
                                         [wself openInBrowser:@"https://pastekeyboard.github.io"];
+                                    },
+                                    },
+                                @{
+                                    @"title":@"Enable Allow Full Access",
+                                    @"action":^(){
+                                        NSURL *settingUrl = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                        [[UIApplication sharedApplication] openURL:settingUrl options:@{} completionHandler:^(BOOL success) {}];
                                     },
                                     },
                                 ]
@@ -69,9 +76,9 @@
                                     },
                                     },
                                 @{
-                                    @"title":@"Blog",
+                                    @"title":@"Follow Wechat",
                                     @"action":^(){
-                                        [wself openInBrowser:@"https://everettjf.github.io"];
+                                        [wself openInBrowser:@"https://everettjf.github.io/bukuzao/"];
                                     },
                                     },
                                 ]

@@ -21,6 +21,7 @@
     if (self) {
         _accumulateString = @"";
         _currentIndex = 0;
+        _speedThreshold = 50;
     }
     return self;
 }
@@ -33,8 +34,11 @@
 }
 
 - (void)next{
+    if (self.speedThreshold > 100) {
+        self.speedThreshold = 100;
+    }
     
-    double delayMs = 50+ arc4random() % 100;
+    double delayMs = (100 - self.speedThreshold) + arc4random() % 100;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayMs/1000 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if(self.stopped){
             return;

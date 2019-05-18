@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) void (^action)(NSString*);
 @property (nonatomic,strong) void (^onProgress)(float progress);
 @property (nonatomic,assign) BOOL stopped;
+@property (nonatomic,assign) NSUInteger speedThreshold; // 0(slow)-100(fast), default 50
 
 - (void)forEach;
 

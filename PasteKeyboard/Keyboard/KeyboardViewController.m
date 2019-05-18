@@ -45,30 +45,12 @@
     // Add custom view sizing constraints here
 }
 
-- (BOOL)fullAccessAvailable{
-    static BOOL hasfullAccess = YES;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if(@available(iOS 11.0,*)){
-            hasfullAccess = [self hasFullAccess];
-        }else{
-            if([UIPasteboard generalPasteboard]){
-                hasfullAccess = YES;
-            }else{
-                hasfullAccess = NO;
-            }
-        }
-    });
-    return hasfullAccess;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupUI];
     
-    if ([self fullAccessAvailable]) {
-        
+    if ([self hasFullAccess]) {
         [self showStatusText:@"..."];
     } else {
         [self showFullAccessGuide];
@@ -96,9 +78,11 @@
 }
 
 - (void)refreshDataFromPasteboard{
-    
     self.pasteboardString = [UIPasteboard generalPasteboard].string;
     NSLog(@"text in pasteboard = %@",self.pasteboardString);
+    if(!self.pasteboardString){
+        return;
+    }
     
     NSString *text = [self.pasteboardString copy];
     if(text.length > 30){
@@ -109,7 +93,7 @@
 }
 
 - (void)initPasteboardData {
-    if(![self fullAccessAvailable]){
+    if(![self hasFullAccess]){
         return;
     }
     
@@ -144,22 +128,11 @@
 }
 
 - (void)setupUI{
-    self.progressView = [[UIProgressView alloc] init];
-    [self.view addSubview:self.progressView];
-    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view);
-        make.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view);
-        make.height.mas_equalTo(3);
-    }];
-    
-    self.progressView.progress = 0.0;
-    
     self.contentView = [[UIView alloc] init];
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
         make.left.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.progressView.mas_bottom);
         make.right.mas_equalTo(self.view);
     }];
     
@@ -173,6 +146,7 @@
         make.height.mas_equalTo(40);
     }];
     
+    // button view
     {
         self.nextKeyboardButton = [[UIButton alloc]init];
         [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
@@ -198,11 +172,7 @@
         [self configButtonStyle:self.returnButton];
         [self.buttonView addSubview:self.returnButton];
         
-        BOOL needSwitchKey = YES;
-        if (@available(iOS 11.0,*)) {
-            needSwitchKey = [self needsInputModeSwitchKey];
-        }
-        
+        BOOL needSwitchKey = [self needsInputModeSwitchKey];
         if(needSwitchKey){
             [self.nextKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self.buttonView).offset(2);
@@ -241,7 +211,18 @@
         }];
     }
     
+    // content view
     {
+        self.progressView = [[UIProgressView alloc] init];
+        self.progressView.progress = 0.0;
+        [self.view addSubview:self.progressView];
+        [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.contentView);
+            make.right.mas_equalTo(self.contentView);
+            make.top.mas_equalTo(self.contentView);
+            make.height.mas_equalTo(3);
+        }];
+        
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -249,8 +230,8 @@
         self.textLabel.font = [UIFont systemFontOfSize:10];
         [self.contentView addSubview:self.textLabel];
         [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView.mas_left);
-            make.top.equalTo(self.contentView.mas_top).offset(20);
+            make.left.equalTo(self.contentView);
+            make.top.equalTo(self.progressView.mas_bottom).offset(20);
             make.bottom.equalTo(self.contentView.mas_bottom).offset(-20);
         }];
         
@@ -260,9 +241,9 @@
         [self configButtonStyle:self.inputButton];
         [self.contentView addSubview:self.inputButton];
         [self.inputButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top);
-            make.bottom.equalTo(self.contentView.mas_bottom);
-            make.right.equalTo(self.contentView.mas_right);
+            make.top.equalTo(self.progressView.mas_bottom);
+            make.bottom.equalTo(self.contentView);
+            make.right.equalTo(self.contentView);
             make.width.mas_equalTo(120);
             make.left.equalTo(self.textLabel.mas_right).offset(20);
         }];

@@ -32,6 +32,9 @@
 @property (strong, nonatomic) NSTimer *pasteboardCheckTimer;
 @property (assign, nonatomic) NSInteger pasteboardChangeCount;
 
+@property (strong, nonatomic) UIProgressView *progressView;
+@property (strong, nonatomic) UISlider *speedSlider;
+
 @end
 
 @implementation KeyboardViewController
@@ -141,61 +144,58 @@
 }
 
 - (void)setupUI{
+    self.progressView = [[UIProgressView alloc] init];
+    [self.view addSubview:self.progressView];
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view);
+        make.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view);
+        make.height.mas_equalTo(3);
+    }];
+    
+    self.progressView.progress = 0.0;
+    
     self.contentView = [[UIView alloc] init];
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.progressView.mas_bottom);
         make.right.mas_equalTo(self.view);
-    }];
-    
-    UIView *seperator = [[UIView alloc] init];
-    seperator.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:seperator];
-    [seperator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view);
-        make.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.contentView.mas_bottom);
-        make.height.mas_equalTo(1);
     }];
     
     self.buttonView = [[UIView alloc] init];
     [self.view addSubview:self.buttonView];
     [self.buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.contentView.mas_bottom).offset(2);
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view);
         make.height.mas_equalTo(40);
-        make.top.mas_equalTo(seperator.mas_bottom);
     }];
     
     {
         self.nextKeyboardButton = [[UIButton alloc]init];
         [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
-        [self.nextKeyboardButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.nextKeyboardButton addTarget:self action:@selector(handleInputModeListFromView:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
-        self.nextKeyboardButton.backgroundColor = TinyKeyboardViewColor1;
+        [self configButtonStyle:self.nextKeyboardButton];
         [self.buttonView addSubview:self.nextKeyboardButton];
         
         self.tinyKeyboardButton = [[UIButton alloc]init];
         [self.tinyKeyboardButton setTitle:NSLocalizedString(@"Tiny", @"Title for 'Tiny Keyboard' button") forState:UIControlStateNormal];
-        [self.tinyKeyboardButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.tinyKeyboardButton addTarget:self action:@selector(buttonTinyKeyboardTapped:) forControlEvents:UIControlEventTouchUpInside];
-        self.tinyKeyboardButton.backgroundColor = TinyKeyboardViewColor2;
+        [self configButtonStyle:self.tinyKeyboardButton];
         [self.buttonView addSubview:self.tinyKeyboardButton];
         
         self.deleteButton = [[UIButton alloc]init];
         [self.deleteButton setTitle:NSLocalizedString(@"Delete", @"Title for 'Delete' button") forState:UIControlStateNormal];
-        [self.deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.deleteButton addTarget:self action:@selector(buttonBackwardTapped:) forControlEvents:UIControlEventTouchUpInside];
-        self.deleteButton.backgroundColor = TinyKeyboardViewColor1;
+        [self configButtonStyle:self.deleteButton];
         [self.buttonView addSubview:self.deleteButton];
         
         self.returnButton = [[UIButton alloc]init];
         [self.returnButton setTitle:NSLocalizedString(@"Return", @"Title for 'Return' button") forState:UIControlStateNormal];
-        [self.returnButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.returnButton addTarget:self action:@selector(buttonReturnTapped:) forControlEvents:UIControlEventTouchUpInside];
-        self.returnButton.backgroundColor = TinyKeyboardViewColor2;
+        [self configButtonStyle:self.returnButton];
         [self.buttonView addSubview:self.returnButton];
         
         BOOL needSwitchKey = YES;
@@ -205,13 +205,13 @@
         
         if(needSwitchKey){
             [self.nextKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.buttonView);
+                make.left.mas_equalTo(self.buttonView).offset(2);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
             }];
             
             [self.tinyKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.nextKeyboardButton.mas_right);
+                make.left.mas_equalTo(self.nextKeyboardButton.mas_right).offset(2);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
                 make.width.mas_equalTo(self.nextKeyboardButton);
@@ -219,23 +219,23 @@
             
         }else{
             [self.tinyKeyboardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.buttonView);
+                make.left.mas_equalTo(self.buttonView).offset(2);
                 make.top.mas_equalTo(self.buttonView);
                 make.bottom.mas_equalTo(self.buttonView);
             }];
         }
         
         [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.tinyKeyboardButton.mas_right);
+            make.left.mas_equalTo(self.tinyKeyboardButton.mas_right).offset(2);
             make.top.mas_equalTo(self.buttonView);
             make.bottom.mas_equalTo(self.buttonView);
             make.width.mas_equalTo(self.tinyKeyboardButton);
         }];
         
         [self.returnButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.deleteButton.mas_right);
+            make.left.mas_equalTo(self.deleteButton.mas_right).offset(2);
             make.top.mas_equalTo(self.buttonView);
-            make.right.mas_equalTo(self.buttonView);
+            make.right.mas_equalTo(self.buttonView).offset(-2);
             make.bottom.mas_equalTo(self.buttonView);
             make.width.mas_equalTo(self.deleteButton);
         }];
@@ -256,9 +256,8 @@
         
         self.inputButton = [[UIButton alloc]init];
         [self.inputButton setTitle:NSLocalizedString(@"Input", @"Title for 'Input' button") forState:UIControlStateNormal];
-        [self.inputButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.inputButton addTarget:self action:@selector(buttonInputTapped:) forControlEvents:UIControlEventTouchUpInside];
-        self.inputButton.backgroundColor = TinyKeyboardViewColor1;
+        [self configButtonStyle:self.inputButton];
         [self.contentView addSubview:self.inputButton];
         [self.inputButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top);
@@ -268,12 +267,24 @@
             make.left.equalTo(self.textLabel.mas_right).offset(20);
         }];
     }
-    
-    UIColor *textColor = [UIColor blackColor];
+    [self configColors:[UIColor blackColor]];
+}
+
+- (void)configColors:(UIColor *)textColor{
     [self.nextKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
     [self.tinyKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
     [self.deleteButton setTitleColor:textColor forState:UIControlStateNormal];
     [self.returnButton setTitleColor:textColor forState:UIControlStateNormal];
+    [self.inputButton setTitleColor:textColor forState:UIControlStateNormal];
+    
+    self.textLabel.textColor = textColor;
+}
+
+- (void)configButtonStyle:(UIButton*)button{
+    button.layer.masksToBounds = YES;
+    button.layer.cornerRadius = 5;
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = [UIColor grayColor].CGColor;
 }
 
 - (void)textWillChange:(id<UITextInput>)textInput {
@@ -283,6 +294,11 @@
 - (void)textDidChange:(id<UITextInput>)textInput {
     // The app has just changed the document's contents, the document context has been updated.
     
+    if (self.textDocumentProxy.keyboardAppearance == UIKeyboardAppearanceDark) {
+        [self configColors:[UIColor whiteColor]];
+    } else {
+        [self configColors:[UIColor blackColor]];
+    }
 }
 
 - (void)buttonBackwardTapped:(id)sender{
@@ -353,6 +369,17 @@
     __weak typeof(self) wself = self;
     self.delayAction.action = ^(NSString* str) {
         [wself.textDocumentProxy insertText:str];
+    };
+    self.delayAction.onProgress = ^(float progress) {
+        if (progress == 1.0) {
+            [wself.progressView setProgress:progress animated:YES];
+        } else if (progress == 0.0) {
+            [wself.progressView setProgress:progress animated:YES];
+        } else {
+            if (progress - wself.progressView.progress >= 0.01) {
+                [wself.progressView setProgress:progress animated:NO];
+            }
+        }
     };
     
     [self.delayAction forEach];

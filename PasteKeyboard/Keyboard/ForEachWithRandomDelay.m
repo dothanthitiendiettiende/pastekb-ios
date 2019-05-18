@@ -27,6 +27,8 @@
 
 - (void)forEach{
     self.currentIndex = 0;
+    self.onProgress(0);
+    
     [self next];
 }
 
@@ -64,7 +66,11 @@
         }
         
         self.currentIndex += 1;
-        
+        float progress = self.currentIndex * 1.0 / self.items.count;
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
+        self.onProgress(progress);
+
         [self next];
     });
 }

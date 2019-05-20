@@ -85,8 +85,8 @@
     }
     
     NSString *text = [self.pasteboardString copy];
-    if(text.length > 100){
-        text = [text substringToIndex:100];
+    if(text.length > 40){
+        text = [text substringToIndex:40];
         text = [text stringByAppendingString:@" ..."];
     }
     [self showStatusText:text];
@@ -109,7 +109,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSLog(@"appear");
     
     if ([self hasFullAccess]) {
         [self initPasteboardData];
@@ -120,11 +119,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    NSLog(@"disappear");
     
-}
-- (void)dealloc{
-    NSLog(@"dealloc");
 }
 
 - (void)setupUI{
@@ -251,8 +246,8 @@
         }];
         
         self.textLabel = [[UILabel alloc] init];
-        self.textLabel.numberOfLines = 5;
-        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.textLabel.numberOfLines = 3;
+        self.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.textLabel.textAlignment = NSTextAlignmentLeft;
         self.textLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.textLabel];
@@ -261,6 +256,7 @@
             make.top.equalTo(self.speedSlider.mas_bottom).offset(5);
             make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
             make.right.mas_equalTo(self.inputButton.mas_left).offset(-5);
+            make.height.mas_greaterThanOrEqualTo(60);
         }];
         
     }

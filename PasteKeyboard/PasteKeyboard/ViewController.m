@@ -61,7 +61,7 @@
                                 @{
                                     @"title":NSLocalizedString(@"Email",nil),
                                     @"action":^(){
-                                        [wself openURL:@"mailto://everettjf@live.com"];
+                                        [wself openURL:@"mailto://everettjf@live.com?subject=PasteKeyboard"];
                                     },
                                     },
                                 ]
@@ -79,12 +79,6 @@
                                     @"title":NSLocalizedString(@"Follow Wechat",nil),
                                     @"action":^(){
                                         [wself openInBrowser:@"https://everettjf.github.io/bukuzao/"];
-                                    },
-                                    },
-                                @{
-                                    @"title":NSLocalizedString(@"Twitter",nil),
-                                    @"action":^(){
-                                        [wself openInBrowser:@"https://twitter.com/everettjf"];
                                     },
                                     },
                                 ]
